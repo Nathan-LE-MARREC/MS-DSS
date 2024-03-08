@@ -48,15 +48,15 @@ def calculer_orbite():
     
     if type_orbite.lower() == "circulaire":
         demi_grand_axe = float(rayon_orbite) + RAYON_TERRE
+        periode_orbitale_minutes, demi_grand_axe = calculer_periode_orbitale(type_orbite, float(rayon_orbite))
     elif type_orbite.lower() == "elliptique":
         demi_grand_axe = (float(apogee) + float(perigee) + 2 * RAYON_TERRE) / 2
-    elif type_orbite.lower() == "circulaire":
-        demi_grand_axe = float(rayon_orbite) + RAYON_TERRE
+        periode_orbitale_minutes, demi_grand_axe = calculer_periode_orbitale(type_orbite, float(apogee), float(perigee))
     else:
         messagebox.showerror("Erreur", "Type d'orbite non pris en charge.")
         return
     
-    periode_orbitale_minutes, demi_grand_axe = calculer_periode_orbitale(type_orbite, float(apogee), float(perigee))
+    
     temps_ombre_minutes, temps_soleil_minutes = calculer_temps_ombre_soleil(demi_grand_axe, periode_orbitale_minutes)
     vitesse_kmps, vitesse_kmph = calculer_vitesse(demi_grand_axe, periode_orbitale_minutes)
     
